@@ -1,0 +1,7 @@
+{
+    "require": {
+        "swiftmailer/swiftmailer": "@stable",
+        "mustangostang/spyc": "@stable",
+        "strangerwork/strangerfw": "dev-master"
+    }
+}
