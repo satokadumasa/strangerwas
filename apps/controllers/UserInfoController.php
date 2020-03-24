@@ -52,7 +52,7 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
       $this->dbh->commit();
       $url = BASE_URL . 'UserInfo' . '/show/' . $user_infos->primary_key_value . '/';
       $this->redirect($url);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->debug->log("UserInfoController::create() error:" . $e->getMessage());
       $this->set('Title', 'UserInfo Save Error');
       $this->set('error_message', '保存ができませんでした。');
@@ -70,7 +70,7 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
       $this->set('Title', 'UserInfo Edit');
       $this->set('UserInfo', $datas['UserInfo']);
       $this->set('datas', $datas);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->debug->log("UserInfoController::edit() error:" . $e->getMessage());
     }
   }
@@ -82,7 +82,7 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
       $user_infos->delete($this->request['id']);
       $this->dbh->commit();
       $url = BASE_URL . 'UserInfo' . '/index/';
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->debug->log("UsersController::delete() error:" . $e->getMessage());
     }
   }

@@ -1,7 +1,7 @@
 <?php
-class RoleController extends \strangerfw\core\contoroller\BaseController{
+class RoleController extends \strangerfw\core\controller\BaseController{
   public function __construct($uri, $url = null) {
-    $conf = Config::get('database.config');
+    $conf = \strangerfw\core\Config::get('database.config');
     $database = $conf['default_database'];
     parent::__construct($database, $uri, $url);
     $this->controller_class_name = str_replace('Controller', '', get_class($this));;
@@ -54,7 +54,7 @@ class RoleController extends \strangerfw\core\contoroller\BaseController{
       $this->dbh->commit();
       $url = BASE_URL . 'Role' . '/show/' . $roles->primary_key_value . '/';
       $this->redirect($url);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->debug->log("RoleController::create() error:" . $e->getMessage());
       $this->set('Title', 'Role Save Error');
       $this->set('error_message', '保存ができませんでした。');
@@ -72,7 +72,7 @@ class RoleController extends \strangerfw\core\contoroller\BaseController{
       $this->set('Title', 'Role Edit');
       $this->set('Role', $datas['Role']);
       $this->set('datas', $datas);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->debug->log("RoleController::edit() error:" . $e->getMessage());
     }
   }
@@ -84,7 +84,7 @@ class RoleController extends \strangerfw\core\contoroller\BaseController{
       $roles->delete($this->request['id']);
       $this->dbh->commit();
       $url = BASE_URL . 'Role' . '/index/';
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->debug->log("UsersController::delete() error:" . $e->getMessage());
     }
   }

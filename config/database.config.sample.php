@@ -1,5 +1,5 @@
 <?php
-$default_database = array(
+$default_database = [
   'rdb'      => 'mysql',
   'host'     => 'localhost',
   'port'     => 3306,
@@ -7,4 +7,4 @@ $default_database = array(
   'charset'  => 'utf8',
   'username' => 'user',
   'password' => '',
-);
+];

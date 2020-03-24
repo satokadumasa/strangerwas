@@ -7,9 +7,9 @@ class MenuHelper{
 
   private $auth = null;
   public function __construct($auth) {
-    $this->error_log = new Logger('ERROR');
-    $this->info_log = new Logger('INFO');
-    $this->debug = new Logger('DEBUG');
+    $this->error_log = nnew \strangerfw\utils\Logger('ERROR');
+    $this->info_log = nnew \strangerfw\utils\Logger('INFO');
+    $this->debug = nnew \strangerfw\utils\Logger('DEBUG');
     $this->auth = $auth;
   }
 
@@ -63,5 +63,5 @@ EOF;
 
     }
     return $site_menu;
-  }  
+  }
 }

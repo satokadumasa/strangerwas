@@ -10,7 +10,7 @@ define('DB_PATH', PROJECT_ROOT.'/db');
 define('MIGRATION_PATH', DB_PATH.'/migrate/');
 define('SCHEMA_PATH', DB_PATH.'/schema/');
 define('VENDOR_PATH', PROJECT_ROOT.'/vendor/');
-define('LIB_PATH', VENDOR_PATH.'strangerwork/strangerfw/src/');
+define('LIB_PATH', VENDOR_PATH.'strangerwork/strangerfw/src');
 define('SCAFFOLD_TEMPLATE_PATH', VENDOR_PATH.'strangerwork/strangerfw//templates/');
 
 define('CONTROLLER_PATH', APP_PATH . 'controllers/');
@@ -42,10 +42,10 @@ define('ADMIN_ROLE_ID', 1);
 define('OPERATOR_ROLE_ID', 2);
 define('USER_ROLE_ID', 3);
 
-$CONV_STRING_LIST = array(
+$CONV_STRING_LIST = [
     'ID' => '\d',
     'YEAR' => '\d{4}',
     'MONTH' => '\d{2}',
     'MDAY' => '\d{2}',
     'CONFIRM_STRING' => '\w{16}',
-  );
+  ];

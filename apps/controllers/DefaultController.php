@@ -1,5 +1,5 @@
 <?php
-class DefaultController extends \strangerfw\core\contoroller\BaseController {
+class DefaultController extends \strangerfw\core\controller\BaseController {
   public function __construct($uri, $url = null) {
     $database = Config::get('database.config');
     parent::__construct($database["default_database"], $uri, $url);
