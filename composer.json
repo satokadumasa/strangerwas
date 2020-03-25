@@ -1,4 +1,14 @@
 {
+    "name": "cakephp/app",
+    "homepage": "https://september-rain.com/",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kadumasa Sato",
+            "email": "sato.kadumasa@gmail.com"
+        }
+    ],
     "require": {
         "swiftmailer/swiftmailer": "@stable",
         "mustangostang/spyc": "@stable",
