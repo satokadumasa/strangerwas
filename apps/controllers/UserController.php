@@ -3,6 +3,8 @@ class UserController extends \strangerfw\core\controller\BaseController {
 // class UserController {
   public $controller_class_name;
   public function __construct($uri, $url = null) {
+    $debug= new \strangerfw\utils\Logger('DEBUG');
+    $debug->log('UserController::__constructor()');
     $conf = \strangerfw\core\Config::get('database.config');
     $database = $conf['default_database'];
     parent::__construct($database, $uri, $url);
@@ -61,12 +63,13 @@ class UserController extends \strangerfw\core\controller\BaseController {
 
 
   public function index() {
+    $this->debug->log('UserController::index()');
     $users = new \User($this->dbh);
     $limit = 10 * (isset($this->request['page']) ? $this->request['page'] : 1);
     $offset = 10 * (isset($this->request['page']) ? $this->request['page'] - 1 : 0);
 
     // $datas = $users->where('User.id', '>', 0)->limit($limit)->offset($offset)->find('all');
-    $data = $user->contain(['UserInfo','Board' => ['Page']])
+    $data = $users->contain(['UserInfo'])
       ->select([
         'User' => [
           'id',
@@ -76,18 +79,14 @@ class UserController extends \strangerfw\core\controller\BaseController {
           'username AS name',
           'addres',
         ],
-        'Board' => [
-          'title',
-          'created_at',
-        ],
       ])->find();
 
     $ref = isset($this->request['page']) ? $this->request['page'] : 0;
     $next = isset($this->request['page']) ? $this->request['page'] + 1 : 2;
 
     $this->set('Title', 'User List');
-    $this->set('datas', $datas);
-    $this->set('User', $datas);
+    $this->set('datas', $data);
+    $this->set('User', $data);
     $this->set('ref', $ref);
     $this->set('next', $next);
   }

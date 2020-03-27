@@ -7,9 +7,9 @@ class MenuHelper{
 
   private $auth = null;
   public function __construct($auth) {
-    $this->error_log = nnew \strangerfw\utils\Logger('ERROR');
-    $this->info_log = nnew \strangerfw\utils\Logger('INFO');
-    $this->debug = nnew \strangerfw\utils\Logger('DEBUG');
+    $this->error_log = new \strangerfw\utils\Logger('ERROR');
+    $this->info_log = new \strangerfw\utils\Logger('INFO');
+    $this->debug = new \strangerfw\utils\Logger('DEBUG');
     $this->auth = $auth;
   }
 
