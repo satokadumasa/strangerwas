@@ -68,7 +68,6 @@ class UserController extends \strangerfw\core\controller\BaseController {
     $limit = 10 * (isset($this->request['page']) ? $this->request['page'] : 1);
     $offset = 10 * (isset($this->request['page']) ? $this->request['page'] - 1 : 0);
 
-    // $datas = $users->where('User.id', '>', 0)->limit($limit)->offset($offset)->find('all');
     $data = $users->contain(['UserInfo'])
       ->select([
         'User' => [
