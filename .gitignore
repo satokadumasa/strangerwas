@@ -1,7 +1,7 @@
-composer.lock
-.buildpath
-.project
-.settings/
+/composer.lock
+/.buildpath
+/.project
+/.settings/*
 
 /config/development/database.config.php
 /config/development/mailer.php
