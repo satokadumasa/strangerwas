@@ -28,7 +28,7 @@ composer.lock
 !RoleController.php
 !UserController.php
 !UserInfoController.php
-/apps/models/
+/apps/models/*
 !Auth.php
 !Role.php
 !UserInfo.php
