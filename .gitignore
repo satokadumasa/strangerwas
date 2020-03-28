@@ -22,7 +22,7 @@
 /logs/*
 !.gitkeep
 
-/app/controllers/*
+/apps/controllers/*
 !.gitkeep
 /!DefaultController.php
 !RoleController.php

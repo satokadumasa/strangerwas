@@ -1,11 +1,16 @@
 <?php
-class Migrate20170601153806CreateTableUser extends \strangerfw\core\migrate\BaseMigrate{
+class Migrate20170601153806CreateTableUser extends \strangerfw\core\migrate\BaseMigrate {
   private $dbh = null;
+
   public function __construct($default_database) {
+    $debug = new \strangerfw\utils\Logger('DEBUG');
+    $debug->log('CreateTableeUser::__construct()');
     parent::__construct($default_database);
+    $debug->log('CreateTableeUser::__construct() END');
   }
 
   public function up() {
+    $this->debug->log('CreateTabalUser::up()');
     $sql = <<<EOM
 CREATE TABLE users (
   id int(9) NOT NULL AUTO_INCREMENT,
@@ -21,6 +26,7 @@ CREATE TABLE users (
   KEY index_email (email)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 EOM;
+    $this->debug->log('Call BaseMigrate::up()');
     parent::up($sql);
 
     $sql = <<<EOM
