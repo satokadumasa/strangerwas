@@ -4,7 +4,7 @@ echo "LIB_PATH:".LIB_PATH."\n";
 require_once LIB_PATH . "/core/ClassLoader.php";
 require_once VENDOR_PATH . "autoload.php";
 
-ini_set('error_reporting', 0);
+ini_set('error_reporting', 1);
 
 putenv("ENVIRONMENT=development");
 

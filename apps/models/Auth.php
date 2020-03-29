@@ -14,11 +14,11 @@ class Auth extends \strangerfw\core\model\BaseModel {
   }
 
   public function save($form) {
-    $form[$this->model_name]['password'] = isset($form[$this->model_name][$this->primary_key]) ? 
-                                            $form[$this->model_name]['password'] : 
+    $form[$this->model_name]['password'] = isset($form[$this->model_name][$this->primary_key]) ?
+                                            $form[$this->model_name]['password'] :
                                             md5($form[$this->model_name]['password'].SALT);
     $form[$this->model_name]['notified_at'] = date('Y-m-d H:i:s');
-    $form[$this->model_name]['authentication_key'] = StringUtil::makeRandStr(16);
+    $form[$this->model_name]['authentication_key'] = \strangerfw\utils\StringUtil::makeRandStr(16);
     parent::save($form);
     return $form;
   }

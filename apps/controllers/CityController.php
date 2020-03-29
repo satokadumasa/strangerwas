@@ -1,5 +1,5 @@
 <?php
-class RoleController extends \strangerfw\core\controller\BaseController{
+class CityController extends \strangerfw\core\controller\BaseController{
   public function __construct($uri, $url = null) {
     $conf = \strangerfw\core\Config::get('database.config');
     $database = $conf['default_database'];
@@ -8,18 +8,18 @@ class RoleController extends \strangerfw\core\controller\BaseController{
   }
 
   public function index() {
-    $roles = new Role($this->dbh);
+    $cities = new City($this->dbh);
     $limit = 10 * (isset($this->request['page']) ? $this->request['page'] : 1);
     $offset = 10 * (isset($this->request['page']) ? $this->request['page'] - 1 : 0);
 
-    $datas = $roles->where('Role.id', '>', 0)->limit($limit)->offset($offset)->find('all');
+    $datas = $cities->where('City.id', '>', 0)->limit($limit)->offset($offset)->find('all');
 
     $ref = isset($this->request['page']) ? $this->request['page'] : 0;
     $next = isset($this->request['page']) ? $this->request['page'] + 1 : 2;
 
-    $this->set('Title', 'Role List');
+    $this->set('Title', 'City List');
     $this->set('datas', $datas);
-    $this->set('Role', $datas);
+    $this->set('City', $datas);
     $this->set('ref', $ref);
     $this->set('next', $next);
   }
@@ -28,60 +28,60 @@ class RoleController extends \strangerfw\core\controller\BaseController{
     $datas = null;
     $id = $this->request['id'];
 
-    $roles = new Role($this->dbh);
-    $datas = $roles->where('Role.id', '=', $id)->find('first');
-    $this->set('Title', 'Role Ditail');
-    $this->set('Role', $datas['Role']);
+    $cities = new City($this->dbh);
+    $datas = $cities->where('City.id', '=', $id)->find('first');
+    $this->set('Title', 'City Ditail');
+    $this->set('City', $datas['City']);
     $this->set('datas', $datas);
   }
 
   public function create() {
-    $this->debug->log("RoleController::create()");
-    $roles = new Role($this->dbh);
-    $form = $roles->createForm();
-    $this->set('Title', 'Role Create');
-    $this->set('Role', $form['Role']);
+    $this->debug->log("CityController::create()");
+    $cities = new City($this->dbh);
+    $form = $cities->createForm();
+    $this->set('Title', 'City Create');
+    $this->set('City', $form['City']);
   }
 
   public function save(){
-    $this->debug->log("RoleController::save()");
+    $this->debug->log("CityController::save()");
     try {
       $this->dbh->beginTransaction();
-      $roles = new Role($this->dbh);
-      $roles->save($this->request);
+      $cities = new City($this->dbh);
+      $cities->save($this->request);
       $this->dbh->commit();
-      $url = BASE_URL . 'Role' . '/show/' . $roles->primary_key_value . '/';
+      $url = BASE_URL . 'City' . '/show/' . $cities->primary_key_value . '/';
       $this->redirect($url);
     } catch (\Exception $e) {
-      $this->debug->log("RoleController::create() error:" . $e->getMessage());
-      $this->set('Title', 'Role Save Error');
+      $this->debug->log("CityController::create() error:" . $e->getMessage());
+      $this->set('Title', 'City Save Error');
       $this->set('error_message', '保存ができませんでした。');
     }
   }
 
   public function edit() {
-    $this->debug->log("RoleController::edit()");
+    $this->debug->log("CityController::edit()");
     try {
       $datas = null;
       $id = $this->request['id'];
 
-      $roles = new Role($this->dbh);
-      $datas = $roles->where('Role.id', '=', $id)->find('first');
-      $this->set('Title', 'Role Edit');
-      $this->set('Role', $datas['Role']);
+      $cities = new City($this->dbh);
+      $datas = $cities->where('City.id', '=', $id)->find('first');
+      $this->set('Title', 'City Edit');
+      $this->set('City', $datas['City']);
       $this->set('datas', $datas);
     } catch (\Exception $e) {
-      $this->debug->log("RoleController::edit() error:" . $e->getMessage());
+      $this->debug->log("CityController::edit() error:" . $e->getMessage());
     }
   }
 
   public function delete() {
     try {
       $this->dbh->beginTransaction();
-      $roles = new Role($this->dbh);
-      $roles->delete($this->request['id']);
+      $cities = new City($this->dbh);
+      $cities->delete($this->request['id']);
       $this->dbh->commit();
-      $url = BASE_URL . 'Role' . '/index/';
+      $url = BASE_URL . 'City' . '/index/';
     } catch (\Exception $e) {
       $this->debug->log("UsersController::delete() error:" . $e->getMessage());
     }

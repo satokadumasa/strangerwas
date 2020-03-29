@@ -1,7 +1,7 @@
 roles:
   id:
     type: int
-    length: 8
+    length: 10
     null: false
     key: PRI
     default: null
@@ -10,16 +10,16 @@ roles:
     length: 64
     null: false
     key: ""
-    default: null
+    default: ""
   created_at:
     type: datetime
     length: 19
-    null: false
-    key: PRI
+    null: 'false'
+    key: ""
     default: null
   modified_at:
     type: datetime
     length: 19
-    null: false
-    key: PRI
+    null: 'false'
+    key: ""
     default: null

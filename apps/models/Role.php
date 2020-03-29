@@ -6,11 +6,15 @@ class Role extends \strangerfw\core\model\BaseModel {
 
   //  Relation
   public $belongthTo = null;
-  public $has = null;
+  public $has = [
+      'User' => [
+          'JOIN_COND' => 'INNER',
+          'FOREIGN_KEY' => 'role_id'
+      ],
+  ];
   public $has_many_and_belongs_to = null;
 
   public function __construct(&$dbh) {
     parent::__construct($dbh);
   }
 }
-

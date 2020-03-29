@@ -1,7 +1,7 @@
 <?php
 class UserController extends \strangerfw\core\controller\BaseController {
-// class UserController {
   public $controller_class_name;
+
   public function __construct($uri, $url = null) {
     $debug= new \strangerfw\utils\Logger('DEBUG');
     $debug->log('UserController::__constructor()');
@@ -75,8 +75,9 @@ class UserController extends \strangerfw\core\controller\BaseController {
           'username',
         ],
         'UserInfo' => [
-          'username AS name',
-          'addres',
+          'first_name',
+          'last_name',
+          'address',
         ],
       ])->find();
 

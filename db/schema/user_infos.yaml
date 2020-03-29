@@ -3,8 +3,14 @@ user_infos:
     type: int
     length: 10
     null: false
-    key: PRI
-    default: null
+    key: ""
+    default: ""
+  user_id:
+    type: int
+    length: 10
+    null: false
+    key: ""
+    default: ""
   first_name:
     type: string
     length: 64
@@ -19,13 +25,13 @@ user_infos:
     default: ""
   pref_id:
     type: int
-    length: 8
+    length: 10
     null: false
     key: ""
     default: ""
-  city:
-    type: string
-    length: 32
+  city_id:
+    type: int
+    length: 10
     null: false
     key: ""
     default: ""

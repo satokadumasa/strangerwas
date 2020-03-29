@@ -4,6 +4,22 @@
 <div class="detail">
   <div class='detail_rows'>
     <div class='label_clumn'>
+      UserInfo id
+    </div>
+    <div class='input_clumn'>
+      <!----value:UserInfo:id---->
+    </div>
+  </div>
+  <div class='detail_rows'>
+    <div class='label_clumn'>
+      UserInfo user_id
+    </div>
+    <div class='input_clumn'>
+      <!----value:UserInfo:user_id---->
+    </div>
+  </div>
+  <div class='detail_rows'>
+    <div class='label_clumn'>
       UserInfo first_name
     </div>
     <div class='input_clumn'>
@@ -28,10 +44,10 @@
   </div>
   <div class='detail_rows'>
     <div class='label_clumn'>
-      UserInfo city
+      UserInfo city_id
     </div>
     <div class='input_clumn'>
-      <!----value:UserInfo:city---->
+      <!----value:UserInfo:city_id---->
     </div>
   </div>
   <div class='detail_rows'>

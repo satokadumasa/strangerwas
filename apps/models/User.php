@@ -5,19 +5,22 @@ class User extends \strangerfw\core\model\BaseModel {
   public $model_class_name  = 'User';
 
   //  Relation
-  public $belongthTo = null;
+  public $belongthTo = [
+      'Role' => [
+          'JOIN_COND' => 'INNER',
+          'CONDITIONS' => [
+              'User.role_id' => 'Role.id',
+          ],
+      ],
+  ];
   public $has = [
     'UserInfo' => [
       'JOIN_COND' => 'LEFT',
       'FOREIGN_KEY' => 'user_id'
     ],
-    'Board' => [
+    'Note' => [
       'JOIN_COND' => 'LEFT',
       'FOREIGN_KEY' => 'user_id'
-    ],
-    'Book' +> [
-      'JOIN_COND' => 'LEFT',
-      'FOREIGN_KEY' => 'user_id',
     ],
   ];
   public $has_many_and_belongs_to = null;
