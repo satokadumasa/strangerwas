@@ -1,8 +1,8 @@
-<div class="top_menu">
-  <div class="site_title">
-    <!----value:SiteTitle---->
-  </div>
-  <div class="site_setup">
-    <!----value:SiteTitle---->
-  </div>
-</div>
+        <div class="row">
+            <div class="col-8 site_title">
+                <!----value:SiteTitle---->
+            </div>
+            <div class="col-4 site_title">
+                <!----value:SiteTitle---->
+            </div>
+        </div>

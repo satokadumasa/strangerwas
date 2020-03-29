@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title><!----value:Title----></title>
+<title>City List</title>
 <link rel="stylesheet" href="/css/default.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -12,19 +12,38 @@
 <body>
 <div>
     <div class="container">
-        <!----renderpartial:common/top_menu:top_menu---->
+        <div class="row">
+            <div class="col-8 site_title">
+                value:SiteTitle
+            </div>
+            <div class="col-4 site_title">
+                value:SiteTitle
+            </div>
+        </div>
         <div class="row contents">
             <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3 side_menu">
-            <!----renderpartial:common/side_menu:side_menu---->
+                <div class="side_menu_title">
+                    SIDEMENU
+                </div>
+                <div class="side_menu_item">
+                    SIDEMENU1
+                </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-8 col-xl-6 details">
-            <!----renderpartial:CONTROLLER/ACTION:datas---->
+                <h1>value:action_name</h1>
+                #Write contents here#<br>StrangerPHP デフォルトホームページ<br>
+                ここにコンテンツを追記していってください。<br>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3 left_contents">
                 OTHERS
             </div>
         </div>
-        <!----renderpartial:common/footer:footer---->
+        <div class="row">
+            <div class="col-12 fotter">
+                FOOTER
+            </div>
+        </div>
     </div>
 </div>
 </body>
+</html>
