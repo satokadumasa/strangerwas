@@ -12,6 +12,6 @@
     "require": {
         "swiftmailer/swiftmailer": "@stable",
         "mustangostang/spyc": "@stable",
-        "strangerwork/strangerfw": "1.0.1"
+        "strangerwork/strangerfw": "0.9.0"
     }
 }
