@@ -12,27 +12,27 @@ class PrefController extends \strangerfw\core\controller\BaseController{
     $limit = 10 * (isset($this->request['page']) ? $this->request['page'] : 1);
     $offset = 10 * (isset($this->request['page']) ? $this->request['page'] - 1 : 0);
 
-    $datas = $prefs->where('Pref.id', '>', 0)->limit($limit)->offset($offset)->find('all');
+    $data = $prefs->where('Pref.id', '>', 0)->limit($limit)->offset($offset)->find('all');
 
     $ref = isset($this->request['page']) ? $this->request['page'] : 0;
     $next = isset($this->request['page']) ? $this->request['page'] + 1 : 2;
 
     $this->set('Title', 'Pref List');
-    $this->set('datas', $datas);
-    $this->set('Pref', $datas);
+    $this->set('data', $data);
+    $this->set('Pref', $data);
     $this->set('ref', $ref);
     $this->set('next', $next);
   }
 
   public function show() {
-    $datas = null;
+    $data = null;
     $id = $this->request['id'];
 
     $prefs = new Pref($this->dbh);
-    $datas = $prefs->where('Pref.id', '=', $id)->find('first');
+    $data = $prefs->where('Pref.id', '=', $id)->find('first');
     $this->set('Title', 'Pref Ditail');
-    $this->set('Pref', $datas['Pref']);
-    $this->set('datas', $datas);
+    $this->set('Pref', $data['Pref']);
+    $this->set('data', $data);
   }
 
   public function create() {
@@ -62,14 +62,14 @@ class PrefController extends \strangerfw\core\controller\BaseController{
   public function edit() {
     $this->debug->log("PrefController::edit()");
     try {
-      $datas = null;
+      $data = null;
       $id = $this->request['id'];
 
       $prefs = new Pref($this->dbh);
-      $datas = $prefs->where('Pref.id', '=', $id)->find('first');
+      $data = $prefs->where('Pref.id', '=', $id)->find('first');
       $this->set('Title', 'Pref Edit');
-      $this->set('Pref', $datas['Pref']);
-      $this->set('datas', $datas);
+      $this->set('Pref', $data['Pref']);
+      $this->set('data', $data);
     } catch (\Exception $e) {
       $this->debug->log("PrefController::edit() error:" . $e->getMessage());
     }

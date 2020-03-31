@@ -12,27 +12,27 @@ class CityController extends \strangerfw\core\controller\BaseController{
     $limit = 10 * (isset($this->request['page']) ? $this->request['page'] : 1);
     $offset = 10 * (isset($this->request['page']) ? $this->request['page'] - 1 : 0);
 
-    $datas = $cities->where('City.id', '>', 0)->limit($limit)->offset($offset)->find('all');
+    $data = $cities->where('City.id', '>', 0)->limit($limit)->offset($offset)->find('all');
 
     $ref = isset($this->request['page']) ? $this->request['page'] : 0;
     $next = isset($this->request['page']) ? $this->request['page'] + 1 : 2;
 
     $this->set('Title', 'City List');
-    $this->set('datas', $datas);
-    $this->set('City', $datas);
+    $this->set('data', $data);
+    $this->set('City', $data);
     $this->set('ref', $ref);
     $this->set('next', $next);
   }
 
   public function show() {
-    $datas = null;
+    $data = null;
     $id = $this->request['id'];
 
     $cities = new City($this->dbh);
-    $datas = $cities->where('City.id', '=', $id)->find('first');
+    $data = $cities->where('City.id', '=', $id)->find('first');
     $this->set('Title', 'City Ditail');
-    $this->set('City', $datas['City']);
-    $this->set('datas', $datas);
+    $this->set('City', $data['City']);
+    $this->set('data', $data);
   }
 
   public function create() {
@@ -62,14 +62,14 @@ class CityController extends \strangerfw\core\controller\BaseController{
   public function edit() {
     $this->debug->log("CityController::edit()");
     try {
-      $datas = null;
+      $data = null;
       $id = $this->request['id'];
 
       $cities = new City($this->dbh);
-      $datas = $cities->where('City.id', '=', $id)->find('first');
+      $data = $cities->where('City.id', '=', $id)->find('first');
       $this->set('Title', 'City Edit');
-      $this->set('City', $datas['City']);
-      $this->set('datas', $datas);
+      $this->set('City', $data['City']);
+      $this->set('data', $data);
     } catch (\Exception $e) {
       $this->debug->log("CityController::edit() error:" . $e->getMessage());
     }

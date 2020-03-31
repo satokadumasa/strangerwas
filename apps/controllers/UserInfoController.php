@@ -12,27 +12,27 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
     $limit = 10 * (isset($this->request['page']) ? $this->request['page'] : 1);
     $offset = 10 * (isset($this->request['page']) ? $this->request['page'] - 1 : 0);
 
-    $datas = $user_infos->where('UserInfo.id', '>', 0)->limit($limit)->offset($offset)->find('all');
+    $data = $user_infos->where('UserInfo.id', '>', 0)->limit($limit)->offset($offset)->find('all');
 
     $ref = isset($this->request['page']) ? $this->request['page'] : 0;
     $next = isset($this->request['page']) ? $this->request['page'] + 1 : 2;
 
     $this->set('Title', 'UserInfo List');
-    $this->set('datas', $datas);
-    $this->set('UserInfo', $datas);
+    $this->set('data', $data);
+    $this->set('UserInfo', $data);
     $this->set('ref', $ref);
     $this->set('next', $next);
   }
 
   public function show() {
-    $datas = null;
+    $data = null;
     $id = $this->request['id'];
 
     $user_infos = new UserInfo($this->dbh);
-    $datas = $user_infos->where('UserInfo.id', '=', $id)->find('first');
+    $data = $user_infos->where('UserInfo.id', '=', $id)->find('first');
     $this->set('Title', 'UserInfo Ditail');
-    $this->set('UserInfo', $datas['UserInfo']);
-    $this->set('datas', $datas);
+    $this->set('UserInfo', $data['UserInfo']);
+    $this->set('data', $data);
   }
 
   public function create() {
@@ -62,14 +62,14 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
   public function edit() {
     $this->debug->log("UserInfoController::edit()");
     try {
-      $datas = null;
+      $data = null;
       $id = $this->request['id'];
 
       $user_infos = new UserInfo($this->dbh);
       $datas = $user_infos->where('UserInfo.id', '=', $id)->find('first');
       $this->set('Title', 'UserInfo Edit');
-      $this->set('UserInfo', $datas['UserInfo']);
-      $this->set('datas', $datas);
+      $this->set('UserInfo', $data['UserInfo']);
+      $this->set('data', $data);
     } catch (\Exception $e) {
       $this->debug->log("UserInfoController::edit() error:" . $e->getMessage());
     }

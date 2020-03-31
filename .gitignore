@@ -60,7 +60,7 @@
 !users.csv
 !user_infos.csv
 !prefs.csv
-"cities.csv
+!cities.csv
 /db/schema/*
 !auth.yaml
 !boards.yaml

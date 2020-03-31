@@ -12,27 +12,27 @@ class RoleController extends \strangerfw\core\controller\BaseController{
     $limit = 10 * (isset($this->request['page']) ? $this->request['page'] : 1);
     $offset = 10 * (isset($this->request['page']) ? $this->request['page'] - 1 : 0);
 
-    $datas = $roles->where('Role.id', '>', 0)->limit($limit)->offset($offset)->find('all');
+    $data = $roles->where('Role.id', '>', 0)->limit($limit)->offset($offset)->find('all');
 
     $ref = isset($this->request['page']) ? $this->request['page'] : 0;
     $next = isset($this->request['page']) ? $this->request['page'] + 1 : 2;
 
     $this->set('Title', 'Role List');
-    $this->set('datas', $datas);
-    $this->set('Role', $datas);
+    $this->set('data', $data);
+    $this->set('Role', $data);
     $this->set('ref', $ref);
     $this->set('next', $next);
   }
 
   public function show() {
-    $datas = null;
+    $data = null;
     $id = $this->request['id'];
 
     $roles = new Role($this->dbh);
-    $datas = $roles->where('Role.id', '=', $id)->find('first');
+    $data = $roles->where('Role.id', '=', $id)->find('first');
     $this->set('Title', 'Role Ditail');
-    $this->set('Role', $datas['Role']);
-    $this->set('datas', $datas);
+    $this->set('Role', $data['Role']);
+    $this->set('data', $data);
   }
 
   public function create() {
@@ -62,14 +62,14 @@ class RoleController extends \strangerfw\core\controller\BaseController{
   public function edit() {
     $this->debug->log("RoleController::edit()");
     try {
-      $datas = null;
+      $data = null;
       $id = $this->request['id'];
 
       $roles = new Role($this->dbh);
-      $datas = $roles->where('Role.id', '=', $id)->find('first');
+      $data = $roles->where('Role.id', '=', $id)->find('first');
       $this->set('Title', 'Role Edit');
-      $this->set('Role', $datas['Role']);
-      $this->set('datas', $datas);
+      $this->set('Role', $data['Role']);
+      $this->set('data', $data);
     } catch (\Exception $e) {
       $this->debug->log("RoleController::edit() error:" . $e->getMessage());
     }

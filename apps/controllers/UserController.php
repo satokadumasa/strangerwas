@@ -58,7 +58,7 @@ class UserController extends \strangerfw\core\controller\BaseController {
     $this->set('Title', 'User Confirmed');
     $this->set('message', 'Welcom, Confirmed your redistration.');
     $this->set('User', $data['User']);
-    $this->set('datas', $data);
+    $this->set('data', $data);
   }
 
 
@@ -85,36 +85,32 @@ class UserController extends \strangerfw\core\controller\BaseController {
     $next = isset($this->request['page']) ? $this->request['page'] + 1 : 2;
 
     $this->set('Title', 'User List');
-    $this->set('datas', $data);
+    $this->set('data', $data);
     $this->set('User', $data);
     $this->set('ref', $ref);
     $this->set('next', $next);
   }
 
-  public function show() {
-/*
-    $datas = null;
+  public function detail() {
+    $data = null;
     $id = $this->request['id'];
 
     $users = new \User($this->dbh);
-    $datas = $users->where('User.id', '=', $id)->find('first');
+    $data = $users->where('User.id', '=', $id)->find('first');
+    $this->debug->log("UserComtroll::detail() data:" . print_r($data, true));
     $this->set('Title', 'User Ditail');
-    $this->set('User', $datas['User']);
-    $this->set('datas', $datas);
- */
+    $this->set('User', $data['User']);
+    $this->set('data', $data);
   }
 
   public function create() {
-/*
     $users = new \User($this->dbh);
     $form = $users->createForm();
     $this->set('Title', 'User Create');
     $this->set('User', $form['User']);
- */
   }
 
   public function save(){
-/*
     try {
       $this->dbh->beginTransaction();
       $users = new \User($this->dbh);
@@ -128,11 +124,9 @@ class UserController extends \strangerfw\core\controller\BaseController {
       $this->set('Title', 'User Save Error');
       $this->set('error_message', '保存ができませんでした。');
     }
- */
   }
 
   public function update(){
-/*
     $session = \strangerfw\core\Session::get();
     try {
       $this->dbh->beginTransaction();
@@ -161,28 +155,24 @@ class UserController extends \strangerfw\core\controller\BaseController {
       $this->set('Title', 'User Save Error');
       $this->set('error_message', '保存ができませんでした。');
     }
- */
   }
 
   public function edit() {
-/*
     try {
-      $datas = null;
+      $data = null;
       $id = $this->request['id'];
 
       $users = new \User($this->dbh);
-      $datas = $users->where('User.id', '=', $id)->find('first');
+      $data = $users->where('User.id', '=', $id)->find('first');
       $this->set('Title', 'User Edit');
-      $this->set('User', $datas['User']);
-      $this->set('datas', $datas);
+      $this->set('User', $data['User']);
+      $this->set('data', $dats);
     } catch (\Exception $e) {
       $this->debug->log("UserController::edit() error:" . $e->getMessage());
     }
- */
   }
 
   public function delete() {
-/*
     try {
       $this->dbh->beginTransaction();
       $users = new \User($this->dbh);
@@ -192,6 +182,5 @@ class UserController extends \strangerfw\core\controller\BaseController {
     } catch (\Exception $e) {
       $this->debug->log("UsersController::delete() error:" . $e->getMessage());
     }
- */
   }
 }
