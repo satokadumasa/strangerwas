@@ -1,22 +1,35 @@
 <?php
-class UserController extends \strangerfw\core\controller\BaseController {
+
+class UserController extends \strangerfw\core\controller\BaseController
+{
+
   public $controller_class_name;
 
-  public function __construct($uri, $url = null) {
-    $debug= new \strangerfw\utils\Logger('DEBUG');
+  public function __construct($uri, $url = null)
+  {
+    $debug = new \strangerfw\utils\Logger('DEBUG');
     $debug->log('UserController::__constructor()');
     $conf = \strangerfw\core\Config::get('database.config');
     $database = $conf['default_database'];
     parent::__construct($database, $uri, $url);
-    $this->controller_class_name = str_replace('Controller', '', get_class($this));;
-    $this->setAuthCheck(['create', 'edit', 'show', 'save', 'delete']);
+    $this->controller_class_name = str_replace('Controller', '', get_class($this));
+    ;
+    $this->setAuthCheck([
+      'create',
+      'edit',
+      'show',
+      'save',
+      'delete'
+    ]);
     $this->role_ids = \strangerfw\core\Config::get('acc/users');
     $this->debug->log("UserController::__construct() end");
   }
+
   /**
-   *  ログイン画面
+   * ログイン画面
    */
-  public function login() {
+  public function login()
+  {
     $auths = new \User($this->dbh);
     $form = $auths->createForm();
     $this->set('Title', 'Auth Login');
@@ -24,33 +37,34 @@ class UserController extends \strangerfw\core\controller\BaseController {
   }
 
   /**
-   *  ログアウト処理
+   * ログアウト処理
    */
-  public function logout() {
+  public function logout()
+  {
     session_destroy();
     $this->redirect(DOCUMENT_ROOT);
   }
 
   /**
-   *  ログイン処理
+   * ログイン処理
    */
-  public function auth() {
-    try{
-      if(\strangerfw\Authentication::auth($this->dbh, $this->request)){
+  public function auth()
+  {
+    try {
+      if (\strangerfw\Authentication::auth($this->dbh, $this->request)) {
         $this->redirect(DOCUMENT_ROOT);
-      }
-      else {
-        $this->redirect(DOCUMENT_ROOT.'login/');
+      } else {
+        $this->redirect(DOCUMENT_ROOT . 'login/');
       }
     } catch (\Exception $e) {
-      $this->redirect(DOCUMENT_ROOT.'login/');
+      $this->redirect(DOCUMENT_ROOT . 'login/');
     }
   }
 
   /**
-   *
    */
-  public function confirm(){
+  public function confirm()
+  {
     $user = new \User($this->dbh);
     $data = $user->where('User.authentication_key', '=', $this->request['confirm_string'])->find('first');
     $data['User']['authentication_key'] = null;
@@ -61,28 +75,31 @@ class UserController extends \strangerfw\core\controller\BaseController {
     $this->set('data', $data);
   }
 
-
-  public function index() {
+  public function index()
+  {
     $this->debug->log('UserController::index()');
     $users = new \User($this->dbh);
-    $limit = 10 * (isset($this->request['page']) ? $this->request['page'] : 1);
+    $limit = 10;
     $offset = 10 * (isset($this->request['page']) ? $this->request['page'] - 1 : 0);
 
-    $data = $users->contain(['UserInfo'])
+    $data = $users->contain([
+      'UserInfo'
+    ])
       ->select([
-        'User' => [
-          'id',
-          'username',
-        ],
-        'UserInfo' => [
-          'first_name',
-          'last_name',
-          'address',
-        ],
-      ])->find();
+      'User' => [
+        'id',
+        'username'
+      ],
+      'UserInfo' => [
+        'first_name',
+        'last_name',
+        'address'
+      ]
+    ])
+      ->find();
 
-    $ref = isset($this->request['page']) ? $this->request['page'] : 0;
-    $next = isset($this->request['page']) ? $this->request['page'] + 1 : 2;
+    $ref = isset($this->request['page']) && ($this->request['page'] - 1 > 0) ? ($this->request['page'] - 1) : 0;
+    $next = isset($this->request['page']) && ($this->request['page'] > 0) ? $this->request['page'] + 1 : 2;
 
     $this->set('Title', 'User List');
     $this->set('data', $data);
@@ -91,7 +108,8 @@ class UserController extends \strangerfw\core\controller\BaseController {
     $this->set('next', $next);
   }
 
-  public function detail() {
+  public function detail()
+  {
     $data = null;
     $id = $this->request['id'];
 
@@ -103,14 +121,16 @@ class UserController extends \strangerfw\core\controller\BaseController {
     $this->set('data', $data);
   }
 
-  public function create() {
+  public function create()
+  {
     $users = new \User($this->dbh);
     $form = $users->createForm();
     $this->set('Title', 'User Create');
     $this->set('User', $form['User']);
   }
 
-  public function save(){
+  public function save()
+  {
     try {
       $this->dbh->beginTransaction();
       $users = new \User($this->dbh);
@@ -126,28 +146,23 @@ class UserController extends \strangerfw\core\controller\BaseController {
     }
   }
 
-  public function update(){
+  public function update()
+  {
     $session = \strangerfw\core\Session::get();
     try {
       $this->dbh->beginTransaction();
       $users = new \User($this->dbh);
 
-      if (!isset($session['Auth'])) {
+      if (! isset($session['Auth'])) {
         throw new \Exception("権限がありません。", 1);
       }
-      if (
-          isset($session['Auth']) &&
-          (
-            isset($session['Auth'][$users->primary_key]) &&
-            $session['Auth'][$users->primary_key] != $this->request['User'][$users->primary_key]
-          )
-        ) {
+      if (isset($session['Auth']) && (isset($session['Auth'][$users->primary_key]) && $session['Auth'][$users->primary_key] != $this->request['User'][$users->primary_key])) {
         throw new \Exception("権限がありません。", 1);
       }
 
       $users->update($this->request);
       $this->dbh->commit();
-      $this->redirect(DOCUMENT_ROOT . 'User/show/' . $this->request['User'][$users->primary_key] .'/');
+      $this->redirect(DOCUMENT_ROOT . 'User/show/' . $this->request['User'][$users->primary_key] . '/');
       exit();
       // $this->set('Title', 'User Save Error');
     } catch (\Exception $e) {
@@ -157,7 +172,8 @@ class UserController extends \strangerfw\core\controller\BaseController {
     }
   }
 
-  public function edit() {
+  public function edit()
+  {
     try {
       $data = null;
       $id = $this->request['id'];
@@ -172,7 +188,8 @@ class UserController extends \strangerfw\core\controller\BaseController {
     }
   }
 
-  public function delete() {
+  public function delete()
+  {
     try {
       $this->dbh->beginTransaction();
       $users = new \User($this->dbh);

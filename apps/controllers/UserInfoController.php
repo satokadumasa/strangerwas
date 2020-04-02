@@ -1,21 +1,30 @@
 <?php
-class UserInfoController extends \strangerfw\core\controller\BaseController{
-  public function __construct($uri, $url = null) {
+
+class UserInfoController extends \strangerfw\core\controller\BaseController
+{
+
+  public function __construct($uri, $url = null)
+  {
     $conf = \strangerfw\core\Config::get('database.config');
     $database = $conf['default_database'];
     parent::__construct($database, $uri, $url);
-    $this->controller_class_name = str_replace('Controller', '', get_class($this));;
+    $this->controller_class_name = str_replace('Controller', '', get_class($this));
+    ;
   }
 
-  public function index() {
+  public function index()
+  {
     $user_infos = new UserInfo($this->dbh);
-    $limit = 10 * (isset($this->request['page']) ? $this->request['page'] : 1);
+    $limit = 10;
     $offset = 10 * (isset($this->request['page']) ? $this->request['page'] - 1 : 0);
 
-    $data = $user_infos->where('UserInfo.id', '>', 0)->limit($limit)->offset($offset)->find('all');
+    $data = $user_infos->where('UserInfo.id', '>', 0)
+      ->limit($limit)
+      ->offset($offset)
+      ->find('all');
 
-    $ref = isset($this->request['page']) ? $this->request['page'] : 0;
-    $next = isset($this->request['page']) ? $this->request['page'] + 1 : 2;
+    $ref = isset($this->request['page']) && ($this->request['page'] - 1 > 0) ? ($this->request['page'] - 1) : 0;
+    $next = isset($this->request['page']) && ($this->request['page'] > 0) ? $this->request['page'] + 1 : 2;
 
     $this->set('Title', 'UserInfo List');
     $this->set('data', $data);
@@ -24,7 +33,8 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
     $this->set('next', $next);
   }
 
-  public function show() {
+  public function show()
+  {
     $data = null;
     $id = $this->request['id'];
 
@@ -35,7 +45,8 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
     $this->set('data', $data);
   }
 
-  public function create() {
+  public function create()
+  {
     $this->debug->log("UserInfoController::create()");
     $user_infos = new UserInfo($this->dbh);
     $form = $user_infos->createForm();
@@ -43,7 +54,8 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
     $this->set('UserInfo', $form['UserInfo']);
   }
 
-  public function save(){
+  public function save()
+  {
     $this->debug->log("UserInfoController::save()");
     try {
       $this->dbh->beginTransaction();
@@ -59,7 +71,8 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
     }
   }
 
-  public function edit() {
+  public function edit()
+  {
     $this->debug->log("UserInfoController::edit()");
     try {
       $data = null;
@@ -75,7 +88,8 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
     }
   }
 
-  public function delete() {
+  public function delete()
+  {
     try {
       $this->dbh->beginTransaction();
       $user_infos = new UserInfo($this->dbh);
@@ -86,6 +100,4 @@ class UserInfoController extends \strangerfw\core\controller\BaseController{
       $this->debug->log("UsersController::delete() error:" . $e->getMessage());
     }
   }
-
-
 }

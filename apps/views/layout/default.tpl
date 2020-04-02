@@ -11,20 +11,20 @@
 </head>
 <body>
 <div>
-    <div class="container">
-        <!----renderpartial:common/top_menu:top_menu---->
+    <div class="container-fluid">
+<!----renderpartial:common/top_menu:top_menu---->
         <div class="row contents">
-            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3 side_menu">
-            <!----renderpartial:common/side_menu:side_menu---->
+            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-2 side_menu">
+<!----renderpartial:common/side_menu:side_menu---->
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-8 col-xl-6 details">
-            <!----renderpartial:CONTROLLER/ACTION:datas---->
+            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-8 details">
+<!----renderpartial:CONTROLLER/ACTION:datas---->
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3 left_contents">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2 left_contents">
                 OTHERS
             </div>
         </div>
-        <!----renderpartial:common/footer:footer---->
+<!----renderpartial:common/footer:footer---->
     </div>
 </div>
 </body>
