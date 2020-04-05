@@ -3,8 +3,6 @@
     "homepage": "https://september-rain.com/",
     "type": "project",
     "license": "MIT",
-    "minimum-stability": "RC",
-    "prefer-stable": true,
     "authors": [
         {
             "name": "Kadumasa Sato",
@@ -15,5 +13,6 @@
         "swiftmailer/swiftmailer": "@stable",
         "mustangostang/spyc": "@stable",
         "strangerwork/strangerfw": "@stable"
-    }
+    },
+    "prefer-stable": true
 }
