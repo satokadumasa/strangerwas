@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "swiftmailer/swiftmailer": "@stable",
-        "mustangostang/spyc": "@stable",
+        "swiftmailer/swiftmailer": "6.0",
+        "mustangostang/spyc": "0.6.*,
         "strangerwork/strangerfw": "@stable"
     },
     "prefer-stable": true
