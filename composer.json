@@ -14,5 +14,6 @@
         "mustangostang/spyc": "@stable",
         "strangerwork/strangerfw": "0.9.0"
     },
-    "prefer-stable": true
+    "prefer-stable": true,
+    "minimum-stability": "dev" 
 }
